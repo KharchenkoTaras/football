@@ -10,7 +10,7 @@ module.exports = function(grunt) {
         processhtml: {
             options: {
                 data: {
-                    message: 'Hello world!'
+                    message: 'Process Html'
                 }
             },
             dist: {
@@ -32,7 +32,7 @@ module.exports = function(grunt) {
         },
 
         copy: {
-            main: {
+            libs: {
                 expand: true,
                 cwd: 'src/libs/',
                 src: '**/*.min.js',
@@ -99,7 +99,7 @@ module.exports = function(grunt) {
         less: {
             debug: {
                 files: {
-                    "dist/assets/app.css": "src/assets/css/app.less"
+                    "dist/assets/css/app.css": "src/assets/css/app.less"
                 }
             },
             relaese: {
@@ -109,21 +109,21 @@ module.exports = function(grunt) {
                     optimization: 2
                 },
                 files: {
-                    "dist/assets/app.css": "src/assets/css/app.less"
+                    "dist/assets/css/app.css": "src/assets/css/app.less"
                 }
             }
         },
 
         watch: {
             dev: {
-                files: [ 'Gruntfile.js', 'src/*.js', 'src/*.html' ],
-                tasks: [ 'jshint', 'copy:debug', 'less:debug'],
+                files: [ 'Gruntfile.js', 'src/**/*.js', 'src/**/*.html', 'src/assets/**/*.less' ],
+                tasks: [ 'jshint', 'copy:libs', 'copy:debug', 'less:debug'],
                 options: {
                     atBegin: true
                 }
             },
             min: {
-                files: [ 'Gruntfile.js', '*/*.js', '*.html', 'assets/*.less' ],
+                files: [ 'Gruntfile.js', 'src/**/*.js', 'src/**/*.html', 'src/assets/**/*.less' ],
                 tasks: [ 'jshint', 'html2js:dist', 'concat:dist', 'uglify:dist', 'clean:temp', 'processhtml', 'less:relaese' ],
                 options: {
                     atBegin: true
