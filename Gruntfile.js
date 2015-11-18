@@ -35,14 +35,21 @@ module.exports = function(grunt) {
             libs: {
                 expand: true,
                 cwd: 'src/libs/',
-                src: '**/*.min.js',
+                src: ['**/*.min.js', '**/*-min.js'],
                 dest: 'dist/libs',
                 filter: 'isFile',
             },
             debug: {
                 expand: true,
                 cwd: 'src/',
-                src: ['app/*.js', 'common/*.js', 'app/templates/*.html', 'index.html'],
+                src: ['app/**/*.js', 'common/**/*.js', 'index.html'],
+                dest: 'dist/',
+                filter: 'isFile',
+            },
+            templates: {
+                expand: true,
+                cwd: 'tmp/',
+                src: ['templates.js'],
                 dest: 'dist/',
                 filter: 'isFile',
             }
@@ -64,12 +71,16 @@ module.exports = function(grunt) {
             dist: {
                 src: [ 'src/app/templates/*.html' ],
                 dest: 'tmp/templates.js'
+
             }
         },
 
         clean: {
             temp: {
                 src: [ 'tmp' ]
+            },
+            dist: {
+                src: [ 'dist' ]
             }
         },
 
@@ -78,7 +89,7 @@ module.exports = function(grunt) {
                 separator: ';'
             },
             dist: {
-                src: [ 'src/app/*.js', 'tmp/*.js' ],
+                src: ['src/common/**/*.js', 'src/app/app.js', 'src/app/services/*.js', 'src/app/controllers/*.js', 'tmp/*.js' ],
                 dest: 'tmp/tmp.app.js'
             }
         },
@@ -116,15 +127,16 @@ module.exports = function(grunt) {
 
         watch: {
             dev: {
-                files: [ 'Gruntfile.js', 'src/**/*.js', 'src/**/*.html', 'src/assets/**/*.less' ],
-                tasks: [ 'jshint', 'copy:libs', 'copy:debug', 'less:debug'],
+                files: [ 'Gruntfile.js', 'src/**/*.js', 'src/**/*.html', 'src/assets/**/*.less'],
+                tasks: [ 'clean:dist', 'jshint', 'copy:libs', 'html2js:dist', 'copy:debug', 'copy:templates', 'less:debug', 'clean:temp'
+                ],
                 options: {
                     atBegin: true
                 }
             },
             min: {
                 files: [ 'Gruntfile.js', 'src/**/*.js', 'src/**/*.html', 'src/assets/**/*.less' ],
-                tasks: [ 'jshint', 'html2js:dist', 'concat:dist', 'uglify:dist', 'clean:temp', 'processhtml', 'less:relaese' ],
+                tasks: [ 'clean:dist', 'jshint', 'copy:libs', 'html2js:dist', 'concat:dist', 'uglify:dist', 'processhtml', 'less:relaese', 'clean:temp'],
                 options: {
                     atBegin: true
                 }
@@ -144,6 +156,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-processhtml');
     grunt.loadNpmTasks('grunt-contrib-less');
 
-    grunt.registerTask('dev', [ 'bower', 'connect:server', 'watch:dev' ]);
-    grunt.registerTask('minified', [ 'bower', 'connect:server', 'watch:min' ]);
+    grunt.registerTask('debug', [ 'bower', 'connect:server', 'watch:dev' ]);
+    grunt.registerTask('release', [ 'bower', 'connect:server', 'watch:min' ]);
 };

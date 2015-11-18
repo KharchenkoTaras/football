@@ -1,13 +1,15 @@
-<div class="ms-NavBar">
-  <div class="ms-NavBar-openMenu js-openMenu">
-    <i class="ms-Icon ms-Icon--menu"></i>
-  </div>
-  <ul class="ms-NavBar-items">
-    <li class="ms-NavBar-item ms-NavBar-item--search ms-u-hiddenSm">
-      <div class="ms-TextField">
-        <input class="ms-TextField-field">
-      </div>
-    </li>
-    <li class="ms-NavBar-item"><a class="ms-NavBar-link" ui-sref="home">Home</a></li>
-  </ul>
+<div class="ms-NavBar" ng-controller="NavigationController">
+    <div class="ms-NavBar-openMenu js-openMenu">
+        <i class="ms-Icon ms-Icon--menu"></i>
+    </div>
+    <ul class="ms-NavBar-items">
+        <li class="ms-NavBar-item ms-NavBar-item--search ms-u-hiddenSm">
+            <div class="ms-TextField">
+                <input class="ms-TextField-field" placeholder="Search...">
+            </div>
+        </li>
+        <li class="ms-NavBar-item" ng-class="{'is-selected': state.current.name == 'teams'}" ng-click="state.go('teams')">
+            <a class="ms-NavBar-link" ui-sref="teams">Teams</a>
+        </li>
+    </ul>
 </div>

@@ -1,4 +1,107 @@
+@ms-color-whiteTranslucent40:  rgba(255,255,255,.4);
+.flex {
+  display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box; /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox; /* TWEENER - IE 10 */
+  display: -webkit-flex; /* NEW - Chrome */
+  display: flex; /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+.flex-wrap (@value) {
+  flex-wrap: @value;
+  -webkit-flex-wrap: @value;
+  -ms-flex-wrap: @value;
+}
+
 body {
   margin: 0;
   padding: 0;
+}
+
+.alerts {
+  position: absolute;
+  right: 5px;
+  top: 45px;
+  .ms-Callout.ms-Callout--peek .ms-Callout-header {
+    padding-bottom: 18px;
+  }
+}
+
+.teams {
+  margin: 20px 0 0 20px;
+  .flex();
+  .flex-wrap(wrap);
+  .ms-PersonaCard {
+    min-width: 260px;
+    width: 260px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    position: static;
+    cursor: pointer;
+    .ms-Persona-image {
+      margin: 12px ;
+    }
+    .ms-PersonaCard-persona.is-selected {
+      background-color: #0078F2;
+    }
+  }
+}
+
+#global-spinner {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+
+/* there is no need to define anything inside of the destination
+CSS class since the keyframe will take charge of the animation */
+.fade.ng-enter {
+  animation: fade-in-animation 1s linear;
+  -webkit-animation: fade-in-animation 1s linear;
+}
+
+@keyframes fade-in-animation {
+  from { margin-right:0; }
+  to { opacity:1; }
+}
+
+@-webkit-keyframes fade-in-animation {
+  from { opacity:0; }
+  to { opacity:1; }
+}
+
+.team {
+  .header {
+    padding-top: 20px;
+    text-align: center;
+  }
+  .charts-container {
+    min-height: 500px;
+    .flex();
+    .flex-wrap(wrap);
+
+    -webkit-justify-content: space-around;
+    justify-content: space-around;
+    -webkit-flex-flow: row wrap;
+    flex-flow: row wrap;
+    -webkit-align-items: stretch;
+    align-items: stretch;
+
+    margin: 20px;
+
+    .chart-holder:nth-of-type(1) { flex-grow: 1; }
+    .chart-holder:nth-of-type(2) { flex-grow: 1; }
+
+    #GamesSummaryChart {
+      >div>div {
+        margin: auto;
+        text {
+        font-family: 'Segoe UI Light WestEuropean','Segoe UI Light','Segoe WP Light','Segoe UI','Segoe WP',Tahoma,Arial,sans-serif;
+        }
+      }
+    }
+  }
+  .chart-header {
+    text-align: center;
+    padding-bottom: 15px;
+  }
 }

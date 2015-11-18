@@ -1,0 +1,23 @@
+<div class="team" ng-if="ready">
+    <div class="header">
+        <span class="ms-font-xxl">{{name}}</span>
+    </div>
+    <div>
+        <div class="charts-container">
+            <div class="chart-holder">
+                <div class="chart-header">
+                    <span class="ms-font-xl">Group statistics</span>
+                </div>
+                <div id ="GroupPointsChart" class="chart-holder" ng-controller="GroupPointsController" ng-init="initialize(statisticsPromise)">
+                </div>
+            </div>
+            <div class="chart-holder">
+                <div class="chart-header">
+                    <span class="ms-font-xl">Games Summary</span>
+                </div>
+                <div id ="GamesSummaryChart" class="chart-holder" ng-controller="GamesSummaryController" ng-init="initialize(statisticsPromise)">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

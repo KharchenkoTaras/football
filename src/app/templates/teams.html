@@ -1,0 +1,14 @@
+<div class='teams'>
+    <div class="ms-PersonaCard" ng-repeat="team in teams" ng-click="selectTeam(team.idInternal)">
+        <div class="ms-PersonaCard-persona" ng-class="{'is-selected': (hightLightedTeam == team.idInternal)}">
+            <div class="ms-Persona">
+                <div class="ms-Persona-imageArea">
+                    <img class="ms-Persona-image" ng-src="https://images.onefootball.com/icons/teams/164/{{team.idInternal}}.png">
+                </div>
+                <div class="ms-Persona-details">
+                    <div class="ms-Persona-primaryText" title="{{team.name}}">{{team.name}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

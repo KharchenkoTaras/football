@@ -1,0 +1,15 @@
+<div class="alerts">
+    <div class="ms-Callout ms-Callout--peek" ng-repeat="alert in alerts">
+        <div class="ms-Callout-main">
+            <div class="ms-Callout-header"
+                 ng-class="{'ms-bgColor-error': alert.type == 'error', 'ms-bgColor-info': alert.type == 'info'}">
+                <p class="ms-Callout-title"
+                   ng-class="{'ms-fontColor-error': alert.type == 'error', 'ms-fontColor-info': alert.type == 'info'}">
+                    {{alert.msg}}</p>
+                <button class="ms-Callout-close" ng-click="closeAlert(alert)">
+                    <i class="ms-Icon ms-Icon--x"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
